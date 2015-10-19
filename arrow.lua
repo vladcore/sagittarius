@@ -32,6 +32,8 @@ function Arrow:initialize(x, y, vx, vy, id)
     self.crashed = false
 
     self.blinkTime = 0
+	
+	self.justStarted = true
 end
 
 function Arrow:update(dt)
@@ -128,12 +130,20 @@ function Arrow:update(dt)
 
             -- check for collision with players
             for i=#game.players.contents, 1, -1 do
-                if game.players.contents[i].id ~= self.id and game.players.contents[i].alive then
+                if game.players.contents[i].alive then
                     local dx = game.players.contents[i].x - self.headX
                     local dy = game.players.contents[i].y - self.headY
                     local r = math.sqrt(dx^2 + dy^2)
-
-                    if r < game.players.contents[i].size + 3 then
+					
+					local tdx = game.players.contents[i].x - self.tailX
+                    local tdy = game.players.contents[i].y - self.tailY
+                    local tr = math.sqrt(tdx^2 + tdy^2)
+					
+					if tr < game.players.contents[i].size + 3 and self.justStarted == true and r > game.players.contents[i].size + 3 then
+						self.justStarted = false
+					end
+						
+                    if r < game.players.contents[i].size + 3 and not self.justStarted then
                         game.players.contents[i].alive = false
                         local numSplatters = 50
                         for j=1, numSplatters do
