@@ -61,6 +61,9 @@ function love.load()
     winNotifierAnim = newAnimation(love.graphics.newImage('art/win-notifier-anim.png'), 128, 64, 0.04, 6)
     winNotifierAnim:setMode('bounce')
     winNotifierAnim:seek(6)
+	
+	winNotifier = newAnimation(love.graphics.newImage('art/win-notifier-back.png'), 300, 100, 0.04, 1)
+    winNotifier:setMode('once')
 
     titleImg = love.graphics.newImage('art/title.png')
 
@@ -160,7 +163,7 @@ function love.load()
 
     colorblind = false
 
-    tutorial = true
+    tutorial = false	-- HOLY FUCK TODO DON'T FORGET THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
 
     tutShown = false
 end

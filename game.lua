@@ -493,8 +493,12 @@ function Versus:update(dt)
         end
     end
 
-    if self.numAlive == 1 then
+    if self.numAlive <= 1 and self.turnState == 'over' then
         self.gameOver = true
+		if self.numAlive == 0 then
+			self.winner = 0
+			self.winnerindex = 0
+		end
     end
 
 
@@ -521,7 +525,9 @@ function Versus:update(dt)
         if self.winTime > 1.5 then
             if not self.winNotifier.begun then
                 self.winNotifier:begin(self.winnerindex)
-                self.playerScores[self.winner] = self.playerScores[self.winner] + 1
+				if self.winner > 0 then
+					self.playerScores[self.winner] = self.playerScores[self.winner] + 1
+				end
                 if sounds then
                     winSound:play()
                 end
