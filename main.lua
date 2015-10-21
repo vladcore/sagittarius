@@ -156,15 +156,15 @@ function love.load()
     control = Control:new()
     game = Game:new('Menu')
 
-    canvas = love.graphics.newCanvas(560, 420)
+    canvas = love.graphics.newCanvas(nativeWindowWidth, nativeWindowHeight)
     canvas:setFilter('nearest', 'nearest')
 
     debug = false -- HOLY FUCK TODO DON'T FORGET THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
 
     colorblind = false
 
-    tutorial = false	-- HOLY FUCK TODO DON'T FORGET THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
-
+    tutorial = true
+	
     tutShown = false
 end
 
@@ -208,7 +208,7 @@ function love.draw()
     canvas:clear()
 
     -- draw letterboxes
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(blackColor.r, blackColor.g, blackColor.b)
     love.graphics.rectangle('fill', 0, 0, windowOffsetX, love.graphics.getHeight())
     love.graphics.rectangle('fill', love.graphics.getWidth() - windowOffsetX, 0, windowOffsetX, love.graphics.getHeight())
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), windowOffsetY)

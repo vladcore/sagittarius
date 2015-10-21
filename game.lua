@@ -41,7 +41,7 @@ function Menu:update(dt)
     self.creditsButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
     end
 end
 
@@ -68,17 +68,19 @@ Credits = Game:addState('Credits')
 
 function Credits:enteredState()
     self.menuButton = Button:new(30, 370, 48, 35, 'back', function() game:gotoState('Menu') end, 4)
-    self.georgeButton = Button:new(250, 140, 193, 35, 'George Prosser', function() love.system.openURL('https://twitter.com/jecatjecat') end, 4)
-    self.janButton = Button:new(308, 200, 75, 35, 'Jan125', function() love.system.openURL('http://opengameart.org/users/jan125') end, 4)
+    self.georgeButton = Button:new(250, 140, 192, 35, 'George Prosser', function() love.system.openURL('https://twitter.com/jecatjecat') end, 4)
+    self.janButton = Button:new(311, 200, 74, 35, 'Jan125', function() love.system.openURL('http://opengameart.org/users/jan125') end, 4)
+    self.vladButton = Button:new(276, 260, 167, 35, 'Vlad Coretchi', function() love.system.openURL('https://plus.google.com/+VladCoretchi') end, 4)
 end
 
 function Credits:update(dt)
     self.menuButton:update(dt)
     self.georgeButton:update(dt)
     self.janButton:update(dt)
+	self.vladButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
     end
 end
 
@@ -89,19 +91,22 @@ function Credits:draw()
     love.graphics.setLineStyle('rough')
     love.graphics.setColor(white2Color.r, white2Color.g, white2Color.b)
     love.graphics.line(250, 170, 440, 170)
-    love.graphics.line(308, 230, 385, 230)
+    love.graphics.line(311, 230, 383, 230)
+    love.graphics.line(276, 290, 441, 290)
 
 
     love.graphics.setFont(mediumFont)
     love.graphics.setColor(white2Color.r, white2Color.g, white2Color.b)
-    love.graphics.print('credits', 244, 30)
-    love.graphics.print('game by', 123, 140)
-    love.graphics.print('music by', 184, 200)
+    love.graphics.print('credits', 240, 30)
+    love.graphics.print('game by', 120, 140)	--100px
+    love.graphics.print('music by', 177, 200)	--104px
+	love.graphics.print('modded by', 118, 260)	--128px
 
-
+	--between label and button: 30px
     self.menuButton:draw()
     self.georgeButton:draw()
     self.janButton:draw()
+	self.vladButton:draw()
 end
 
 function Credits:exitedState()
@@ -112,7 +117,7 @@ Options = Game:addState('Options')
 
 function Options:enteredState()
     self.menuButton = Button:new(30, 370, 48, 35, 'back', function() game:gotoState('Menu') end, 4)
-    self.fullscreenToggle = Toggle:new(380, 120, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=560, minheight=420}) end, math.random(5, 9))
+    self.fullscreenToggle = Toggle:new(380, 120, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight}) end, math.random(5, 9))
     self.colorblindToggle = Toggle:new(380, 280, colorblind, function() colorblind = not colorblind end, math.random(5, 9))
     self.tutorialToggle = Toggle:new(380, 240, tutorial, function() tutorial = not tutorial; tutShown = false; self.moved = false; self.aimed = false; self.fired = false; self.cancelled = false; self.winned = false; end, math.random(5, 9))
     self.volumeToggle = Toggle:new(380, 160, sounds, function() sounds = not sounds end, math.random(5, 9))
@@ -128,8 +133,8 @@ function Options:update(dt)
     self.musicToggle:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
-        self.fullscreenToggle = Toggle:new(380, 120, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=560, minheight=420}) end, math.random(5, 9))
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        self.fullscreenToggle = Toggle:new(380, 120, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight}) end, math.random(5, 9))
     end
 end
 
@@ -208,7 +213,7 @@ function Setup:update(dt)
     self.playerIdleAnim:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
     end
 end
 
@@ -331,7 +336,7 @@ function Tutorial:update(dt)
 
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
     end
 
     if self.gameOver then
@@ -537,7 +542,7 @@ function Versus:update(dt)
     end
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=560, minheight=420})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
     end
 
 end
