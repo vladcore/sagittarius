@@ -5,7 +5,7 @@ A simple local multiplayer game based on archers and gravity.
 
 ##Some info
 The game is developed in [lua](http://www.lua.org/) using [LÖVE](https://love2d.org/) framework.
-The code doesn't need to bee compiled. For more information refer to [LÖVE official guide](https://love2d.org/wiki/Game_Distribution).
+The code doesn't need to be compiled. For more information refer to [LÖVE official guide](https://love2d.org/wiki/Game_Distribution).
 
 ##Changelog
 - added autokill
