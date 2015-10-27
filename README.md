@@ -15,4 +15,5 @@ The code doesn't need to be compiled. For more information refer to [LÖVE offic
 - added radomly generated planets
 - added myself to credits
 
-- randomly generated planets
+###Known bugs:
+- window resizing handling
