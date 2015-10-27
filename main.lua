@@ -19,8 +19,8 @@ function love.load()
     math.randomseed(os.time())
 
     -- native window size
-    --nativeWindowWidth = 560
-    --nativeWindowHeight = 420
+    minWindowWidth = 560
+    minWindowHeight = 420
 	
 	windowScaleX = love.graphics.getWidth() / 560
     windowScaleY = love.graphics.getHeight() / 420
@@ -28,10 +28,10 @@ function love.load()
 	
 	nativeWindowWidth = love.graphics.getWidth() / windowScale
 	nativeWindowHeight = love.graphics.getHeight() / windowScale
-	
+
 	stuffScaleX = nativeWindowWidth / 560
 	stuffScaleY = nativeWindowHeight / 420
-
+	
     -- load assets
     -- load art
     love.graphics.setDefaultFilter('nearest', 'nearest', 1)
@@ -169,7 +169,7 @@ function love.load()
     canvas = love.graphics.newCanvas(nativeWindowWidth, nativeWindowHeight)
     canvas:setFilter('nearest', 'nearest')
 
-    debug = false -- HOLY FUCK TODO DON'T FORGET THIS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
+    debug = false
 
     colorblind = false
 
@@ -189,9 +189,20 @@ function love.update(dt)
     --windowScale = math.min(windowScaleX, windowScaleY)
     --windowOffsetX = (windowScaleX - windowScale) * (nativeWindowWidth / 2)
     --windowOffsetY = (windowScaleY - windowScale) * (nativeWindowHeight / 2)
+	
+	windowScaleX = love.graphics.getWidth() / 560
+    windowScaleY = love.graphics.getHeight() / 420
+    windowScale = math.min(windowScaleX, windowScaleY)
+	
+	nativeWindowWidth = love.graphics.getWidth() / windowScale
+	nativeWindowHeight = love.graphics.getHeight() / windowScale
+	
+	stuffScaleX = nativeWindowWidth / 560
+	stuffScaleY = nativeWindowHeight / 420
+	
 	windowOffsetX = 0
 	windowOffsetY = 0
-
+	
     -- update game
     control:update(dt)
     game:update(dt)

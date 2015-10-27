@@ -1,3 +1,4 @@
+require 'misc'
 local class = require 'middleclass'
 local stateful = require 'stateful'
 
@@ -41,7 +42,7 @@ function Menu:update(dt)
     self.creditsButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
     end
 end
 
@@ -80,7 +81,7 @@ function Credits:update(dt)
 	self.vladButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
     end
 end
 
@@ -117,7 +118,7 @@ Options = Game:addState('Options')
 
 function Options:enteredState()
     self.menuButton = Button:new(30 * stuffScaleX, 370 * stuffScaleY, 48, 35, 'back', function() game:gotoState('Menu') end, 4)
-    self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight}) end, math.random(5, 9))
+    self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minWindowWidth, minheight=minWindowHeight}) end, math.random(5, 9))
     self.colorblindToggle = Toggle:new(380 * stuffScaleX, 280 * stuffScaleY, colorblind, function() colorblind = not colorblind end, math.random(5, 9))
     self.tutorialToggle = Toggle:new(380 * stuffScaleX, 240 * stuffScaleY, tutorial, function() tutorial = not tutorial; tutShown = false; self.moved = false; self.aimed = false; self.fired = false; self.cancelled = false; self.winned = false; end, math.random(5, 9))
     self.volumeToggle = Toggle:new(380 * stuffScaleX, 160 * stuffScaleY, sounds, function() sounds = not sounds end, math.random(5, 9))
@@ -133,8 +134,8 @@ function Options:update(dt)
     self.musicToggle:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
-        self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight}) end, math.random(5, 9))
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minWindowWidth, minheight=minWindowHeight}) end, math.random(5, 9))
     end
 end
 
@@ -213,7 +214,7 @@ function Setup:update(dt)
     self.playerIdleAnim:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
     end
 end
 
@@ -336,7 +337,7 @@ function Tutorial:update(dt)
 
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
     end
 
     if self.gameOver then
@@ -406,27 +407,60 @@ function Versus:enteredState()
 
     -- planets
     -- semi-randomized from list
-    self.planets = Container:new()
-    local levelNumber = math.random(1, #levels[self.numPlayers])
-    for i=1, #levels[self.numPlayers][levelNumber] do
-        self.planets:add(Planet:new(levels[self.numPlayers][levelNumber][i][1], levels[self.numPlayers][levelNumber][i][2], levels[self.numPlayers][levelNumber][i][3], levels[self.numPlayers][levelNumber][i][4]))
-    end
+    --self.planets = Container:new()
+    --local levelNumber = math.random(1, #levels[self.numPlayers])
+    --for i=1, #levels[self.numPlayers][levelNumber] do
+    --    self.planets:add(Planet:new(levels[self.numPlayers][levelNumber][i][1], levels[self.numPlayers][levelNumber][i][2], levels[self.numPlayers][levelNumber][i][3], levels[self.numPlayers][levelNumber][i][4]))
+    --end
 
     -- randomly flip
     -- horizontally
-    if chance(0.5) then
-        for i=1, #self.planets.contents do
-            self.planets.contents[i].x = nativeWindowWidth - self.planets.contents[i].x
-        end
-    end
+    --if chance(0.5) then
+    --    for i=1, #self.planets.contents do
+    --        self.planets.contents[i].x = nativeWindowWidth - self.planets.contents[i].x
+    --    end
+    --end
 
     -- vertically
-    if chance(0.5) then
-        for i=1, #self.planets.contents do
-            self.planets.contents[i].y = nativeWindowHeight - self.planets.contents[i].y
-            self.planets.contents[i].y = self.planets.contents[i].y
-        end
-    end
+    --if chance(0.5) then
+    --    for i=1, #self.planets.contents do
+    --        self.planets.contents[i].y = nativeWindowHeight - self.planets.contents[i].y
+    --        self.planets.contents[i].y = self.planets.contents[i].y
+    --    end
+    --end
+	
+	-- planets
+    self.planets = Container:new()
+	local p = {}
+	local numPlanets = math.random(self.numPlayers, self.numPlayers + 5)
+	for i=1, numPlanets do
+		local intersect = true
+		while intersect == true do
+			local r = math.random(8, 58)
+			local x = math.random(r + 50, nativeWindowWidth - r - 50)
+			local y = math.random(r + 50, nativeWindowHeight - r - 50)
+			
+			intersect = false
+			for j=1, i-1 do
+				if planetsIntersection(x, y, r, p[j][1], p[j][2], p[j][3]) == true then
+					intersect = true
+				end
+			end
+			
+			if intersect == false then
+				local occupiable = true
+				if numPlanets - i + 1 > self.numPlayers then
+					if chance(0.5) then
+						occupiable = true
+					else
+						occupiable = false
+					end
+				end
+				p[i] = {x, y, r, occupiable}
+				self.planets:add(Planet:new(p[i][1], p[i][2], p[i][3], p[i][4]))
+			end
+		end
+	end
 
     self.starfield = Starfield:new()
 
@@ -542,7 +576,7 @@ function Versus:update(dt)
     end
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=nativeWindowWidth, minheight=nativeWindowHeight})
+        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
     end
 
 end

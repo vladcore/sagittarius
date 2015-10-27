@@ -151,3 +151,12 @@ function shuffleTable( t )
         t[i], t[j] = t[j], t[i]
     end
 end
+
+function planetsIntersection (x1, y1, r1, x2, y2, r2)
+	local d = math.sqrt(math.pow(math.abs(x1 - x2), 2) + math.pow(math.abs(y1 - y2), 2))
+	if d > r1 + r2 + 50 then
+		return false
+	else
+		return true
+	end
+end
