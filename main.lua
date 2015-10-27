@@ -19,8 +19,18 @@ function love.load()
     math.randomseed(os.time())
 
     -- native window size
-    nativeWindowWidth = 560
-    nativeWindowHeight = 420
+    --nativeWindowWidth = 560
+    --nativeWindowHeight = 420
+	
+	windowScaleX = love.graphics.getWidth() / 560
+    windowScaleY = love.graphics.getHeight() / 420
+    windowScale = math.min(windowScaleX, windowScaleY)
+	
+	nativeWindowWidth = love.graphics.getWidth() / windowScale
+	nativeWindowHeight = love.graphics.getHeight() / windowScale
+	
+	stuffScaleX = nativeWindowWidth / 560
+	stuffScaleY = nativeWindowHeight / 420
 
     -- load assets
     -- load art
@@ -174,11 +184,13 @@ function love.update(dt)
     end
 
     -- determine window scale and offset
-    windowScaleX = love.graphics.getWidth() / nativeWindowWidth
-    windowScaleY = love.graphics.getHeight() / nativeWindowHeight
-    windowScale = math.min(windowScaleX, windowScaleY)
-    windowOffsetX = (windowScaleX - windowScale) * (nativeWindowWidth / 2)
-    windowOffsetY = (windowScaleY - windowScale) * (nativeWindowHeight / 2)
+    --windowScaleX = love.graphics.getWidth() / nativeWindowWidth
+    --windowScaleY = love.graphics.getHeight() / nativeWindowHeight
+    --windowScale = math.min(windowScaleX, windowScaleY)
+    --windowOffsetX = (windowScaleX - windowScale) * (nativeWindowWidth / 2)
+    --windowOffsetY = (windowScaleY - windowScale) * (nativeWindowHeight / 2)
+	windowOffsetX = 0
+	windowOffsetY = 0
 
     -- update game
     control:update(dt)
@@ -208,9 +220,9 @@ function love.draw()
     canvas:clear()
 
     -- draw letterboxes
-    love.graphics.setColor(blackColor.r, blackColor.g, blackColor.b)
-    love.graphics.rectangle('fill', 0, 0, windowOffsetX, love.graphics.getHeight())
-    love.graphics.rectangle('fill', love.graphics.getWidth() - windowOffsetX, 0, windowOffsetX, love.graphics.getHeight())
-    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), windowOffsetY)
-    love.graphics.rectangle('fill', 0, love.graphics.getHeight() - windowOffsetY, love.graphics.getWidth(), windowOffsetY)
+    --love.graphics.setColor(blackColor.r, blackColor.g, blackColor.b)
+    --love.graphics.rectangle('fill', 0, 0, windowOffsetX, love.graphics.getHeight())
+    --love.graphics.rectangle('fill', love.graphics.getWidth() - windowOffsetX, 0, windowOffsetX, love.graphics.getHeight())
+    --love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), windowOffsetY)
+    --love.graphics.rectangle('fill', 0, love.graphics.getHeight() - windowOffsetY, love.graphics.getWidth(), windowOffsetY)
 end

@@ -17,9 +17,9 @@ function WinNotifier:draw()
     if self.begun then
         setColor(self.winnerid, 1)
 		if self.winnerid > 0 then
-			winNotifierAnim:draw(self.x, self.y, 0, self.pointsx, 1, -18, 32)
+			winNotifierAnim:draw(self.x, self.y, 0, self.pointsx, 1, -18 * stuffScaleX, 32 * stuffScaleY)
 		else
-			winNotifier:draw(self.x, self.y, 0, 0.45, 0.64, 150, 50)
+			winNotifier:draw(self.x, self.y, 0, 0.45, 0.64, 150 * stuffScaleX, 50 * stuffScaleY)
 		end
         love.graphics.setFont(mediumFont)
         love.graphics.setColor(blackColor.r, blackColor.g, blackColor.b)
