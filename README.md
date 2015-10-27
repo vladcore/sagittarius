@@ -11,6 +11,8 @@ The code doesn't need to be compiled. For more information refer to [LÖVE offic
 - added autokill
 - added 'no winner' possibility when a player kills everyone (included himself)
 - arrow time increased up to 8 seconds
-- letterboxes color changed to games background to 'mask' them
-- predefines windows dimentions chand to variables instead of values
+- added real fullscreen (without letterboxes)
 - added myself to credits
+
+###To do:
+- randomly generated planets
