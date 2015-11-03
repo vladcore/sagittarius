@@ -19,18 +19,24 @@ function love.load()
     math.randomseed(os.time())
 
     -- native window size
-    minWindowWidth = 560
-    minWindowHeight = 420
+    minFullScreenWidth = 560
+    minFullScreenHeight = 420
 	
-	windowScaleX = love.graphics.getWidth() / 560
-    windowScaleY = love.graphics.getHeight() / 420
+	minWindowWidth = 1120
+	minWindowHeight = 840
+	
+	exWidth = love.graphics.getWidth()
+	exHeight = love.graphics.getHeight()
+	
+	windowScaleX = love.graphics.getWidth() / minFullScreenWidth
+    windowScaleY = love.graphics.getHeight() / minFullScreenHeight
     windowScale = math.min(windowScaleX, windowScaleY)
 	
 	nativeWindowWidth = love.graphics.getWidth() / windowScale
 	nativeWindowHeight = love.graphics.getHeight() / windowScale
 
-	stuffScaleX = nativeWindowWidth / 560
-	stuffScaleY = nativeWindowHeight / 420
+	stuffScaleX = nativeWindowWidth / minFullScreenWidth
+	stuffScaleY = nativeWindowHeight / minFullScreenHeight
 	
     -- load assets
     -- load art
@@ -173,7 +179,7 @@ function love.load()
 
     colorblind = false
 
-    tutorial = true
+    tutorial = true -- !!!
 	
     tutShown = false
 end
@@ -190,18 +196,26 @@ function love.update(dt)
     --windowOffsetX = (windowScaleX - windowScale) * (nativeWindowWidth / 2)
     --windowOffsetY = (windowScaleY - windowScale) * (nativeWindowHeight / 2)
 	
-	windowScaleX = love.graphics.getWidth() / 560
-    windowScaleY = love.graphics.getHeight() / 420
+	windowScaleX = love.graphics.getWidth() / minFullScreenWidth
+    windowScaleY = love.graphics.getHeight() / minFullScreenHeight
     windowScale = math.min(windowScaleX, windowScaleY)
 	
 	nativeWindowWidth = love.graphics.getWidth() / windowScale
 	nativeWindowHeight = love.graphics.getHeight() / windowScale
-	
-	stuffScaleX = nativeWindowWidth / 560
-	stuffScaleY = nativeWindowHeight / 420
+
+	stuffScaleX = nativeWindowWidth / minFullScreenWidth
+	stuffScaleY = nativeWindowHeight / minFullScreenHeight
 	
 	windowOffsetX = 0
 	windowOffsetY = 0
+	
+	--aggiunger if != get.. != ex..
+    if exWidth ~= love.graphics.getWidth() or exHeight ~= love.graphics.getHeight() then
+		canvas = love.graphics.newCanvas(nativeWindowWidth, nativeWindowHeight)
+		canvas:setFilter('nearest', 'nearest')
+		exWidth = love.graphics.getWidth()
+		exHeight = love.graphics.getHeight()
+	end
 	
     -- update game
     control:update(dt)

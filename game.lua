@@ -42,7 +42,7 @@ function Menu:update(dt)
     self.creditsButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
     end
 end
 
@@ -81,7 +81,7 @@ function Credits:update(dt)
 	self.vladButton:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
     end
 end
 
@@ -118,7 +118,7 @@ Options = Game:addState('Options')
 
 function Options:enteredState()
     self.menuButton = Button:new(30 * stuffScaleX, 370 * stuffScaleY, 48, 35, 'back', function() game:gotoState('Menu') end, 4)
-    self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minWindowWidth, minheight=minWindowHeight}) end, math.random(5, 9))
+    self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight}) end, math.random(5, 9))
     self.colorblindToggle = Toggle:new(380 * stuffScaleX, 280 * stuffScaleY, colorblind, function() colorblind = not colorblind end, math.random(5, 9))
     self.tutorialToggle = Toggle:new(380 * stuffScaleX, 240 * stuffScaleY, tutorial, function() tutorial = not tutorial; tutShown = false; self.moved = false; self.aimed = false; self.fired = false; self.cancelled = false; self.winned = false; end, math.random(5, 9))
     self.volumeToggle = Toggle:new(380 * stuffScaleX, 160 * stuffScaleY, sounds, function() sounds = not sounds end, math.random(5, 9))
@@ -134,8 +134,8 @@ function Options:update(dt)
     self.musicToggle:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
-        self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(1120, 840, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minWindowWidth, minheight=minWindowHeight}) end, math.random(5, 9))
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
+        self.fullscreenToggle = Toggle:new(380 * stuffScaleX, 120 * stuffScaleY, love.window.getFullscreen(), function() love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=not love.window.getFullscreen(), fullscreentype='desktop', resizable=true, centered=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight}) end, math.random(5, 9))
     end
 end
 
@@ -214,7 +214,7 @@ function Setup:update(dt)
     self.playerIdleAnim:update(dt)
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
     end
 end
 
@@ -337,7 +337,7 @@ function Tutorial:update(dt)
 
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
     end
 
     if self.gameOver then
@@ -442,7 +442,7 @@ function Versus:enteredState()
 			
 			intersect = false
 			for j=1, i-1 do
-				if planetsIntersection(x, y, r, p[j][1], p[j][2], p[j][3]) == true then
+				if planetsIntersection(x, y, r, p[j][1], p[j][2], p[j][3], numPlanets - i + 1, self.numPlayers) == true then
 					intersect = true
 				end
 			end
@@ -576,7 +576,7 @@ function Versus:update(dt)
     end
 
     if control:keyPressed('escape') and love.window.getFullscreen() then
-        love.window.setMode(1120, 840, {fullscreen=false, resizable=true, minwidth=minWindowWidth, minheight=minWindowHeight})
+        love.window.setMode(minWindowWidth, minWindowHeight, {fullscreen=false, resizable=true, minwidth=minFullScreenWidth, minheight=minFullScreenHeight})
     end
 
 end
