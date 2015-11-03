@@ -12,7 +12,8 @@ The code doesn't need to be compiled. For more information refer to [LÖVE offic
 - added 'no winner' possibility when a player kills everyone (included himself)
 - arrow time increased up to 8 seconds
 - added real fullscreen (without letterboxes)
+- added radomly generated planets
 - added myself to credits
 
-###To do:
-- randomly generated planets
+###Known bugs:
+- window resizing handling
