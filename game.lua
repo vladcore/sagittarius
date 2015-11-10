@@ -404,35 +404,15 @@ function Versus:enteredState()
     self.trails = Container:new()
     self.continueButton = Button:new(483 * stuffScaleX, 370 * stuffScaleY, 50, 35, 'next', function() game:gotoState('Versus') end, 1)
     self.backButton = Button:new(30 * stuffScaleX, 370 * stuffScaleY, 49, 35, 'back', function() game:gotoState('Setup') end, 4)
-
-    -- planets
-    -- semi-randomized from list
-    --self.planets = Container:new()
-    --local levelNumber = math.random(1, #levels[self.numPlayers])
-    --for i=1, #levels[self.numPlayers][levelNumber] do
-    --    self.planets:add(Planet:new(levels[self.numPlayers][levelNumber][i][1], levels[self.numPlayers][levelNumber][i][2], levels[self.numPlayers][levelNumber][i][3], levels[self.numPlayers][levelNumber][i][4]))
-    --end
-
-    -- randomly flip
-    -- horizontally
-    --if chance(0.5) then
-    --    for i=1, #self.planets.contents do
-    --        self.planets.contents[i].x = nativeWindowWidth - self.planets.contents[i].x
-    --    end
-    --end
-
-    -- vertically
-    --if chance(0.5) then
-    --    for i=1, #self.planets.contents do
-    --        self.planets.contents[i].y = nativeWindowHeight - self.planets.contents[i].y
-    --        self.planets.contents[i].y = self.planets.contents[i].y
-    --    end
-    --end
 	
 	-- planets
+	local time_start = love.timer.getTime()
+	local time_end = time_start
+	local predefined = false
+	
     self.planets = Container:new()
 	local p = {}
-	local numPlanets = math.random(self.numPlayers, self.numPlayers + 5)
+	local numPlanets = math.random(4, self.numPlayers + 7)
 	for i=1, numPlanets do
 		local intersect = true
 		while intersect == true do
@@ -459,6 +439,37 @@ function Versus:enteredState()
 				p[i] = {x, y, r, occupiable}
 				self.planets:add(Planet:new(p[i][1], p[i][2], p[i][3], p[i][4]))
 			end
+			
+			time_end = love.timer.getTime()
+			if (time_end - time_start > 2) then
+				intersect = true
+				i = numPlanets + 1
+				predefined = true
+			end
+		end
+	end
+	
+	if predefined == true then
+		-- semi-randomized from list
+		self.planets = Container:new()
+		local levelNumber = math.random(1, #levels[self.numPlayers])
+		for i=1, #levels[self.numPlayers][levelNumber] do
+		    self.planets:add(Planet:new(levels[self.numPlayers][levelNumber][i][1], levels[self.numPlayers][levelNumber][i][2], levels[self.numPlayers][levelNumber][i][3], levels[self.numPlayers][levelNumber][i][4]))
+		end
+
+		-- randomly flip
+		-- horizontally
+		if chance(0.5) then
+		    for i=1, #self.planets.contents do
+		        self.planets.contents[i].x = nativeWindowWidth - self.planets.contents[i].x
+		    end
+		end
+		-- vertically
+		if chance(0.5) then
+		    for i=1, #self.planets.contents do
+		        self.planets.contents[i].y = nativeWindowHeight - self.planets.contents[i].y
+		        self.planets.contents[i].y = self.planets.contents[i].y
+		    end
 		end
 	end
 
