@@ -442,7 +442,7 @@ function Versus:enteredState()
 			
 			time_end = love.timer.getTime()
 			if (time_end - time_start > 2) then
-				intersect = true
+				intersect = false
 				i = numPlanets + 1
 				predefined = true
 			end
