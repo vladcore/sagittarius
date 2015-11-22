@@ -176,7 +176,7 @@ function Player:update(dt)
         end
 
         -- cancel aim
-        if control:mousePressed('r') then
+        if control:mousePressed('r') or control:keyDown('w') or control:keyDown('s') then
             self.aiming = false
 
             self.aimStartX = 0

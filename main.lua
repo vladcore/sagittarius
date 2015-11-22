@@ -16,11 +16,12 @@ require 'toggle'
 require 'winnotifier'
 
 function love.load()
-    math.randomseed(os.time())
+  
+	math.randomseed(os.time())
 
-    -- native window size
-    minFullScreenWidth = 560
-    minFullScreenHeight = 420
+	-- native window size
+	minFullScreenWidth = 560
+	minFullScreenHeight = 420
 	
 	minWindowWidth = 1120
 	minWindowHeight = 840
@@ -29,8 +30,8 @@ function love.load()
 	exHeight = love.graphics.getHeight()
 	
 	windowScaleX = love.graphics.getWidth() / minFullScreenWidth
-    windowScaleY = love.graphics.getHeight() / minFullScreenHeight
-    windowScale = math.min(windowScaleX, windowScaleY)
+	windowScaleY = love.graphics.getHeight() / minFullScreenHeight
+	windowScale = math.min(windowScaleX, windowScaleY)
 	
 	nativeWindowWidth = love.graphics.getWidth() / windowScale
 	nativeWindowHeight = love.graphics.getHeight() / windowScale
@@ -209,7 +210,6 @@ function love.update(dt)
 	windowOffsetX = 0
 	windowOffsetY = 0
 	
-	--aggiunger if != get.. != ex..
     if exWidth ~= love.graphics.getWidth() or exHeight ~= love.graphics.getHeight() then
 		canvas = love.graphics.newCanvas(nativeWindowWidth, nativeWindowHeight)
 		canvas:setFilter('nearest', 'nearest')

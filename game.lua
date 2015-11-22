@@ -409,12 +409,13 @@ function Versus:enteredState()
 	local time_start = love.timer.getTime()
 	local time_end = time_start
 	local predefined = false
+	local intersect = true
 	
     self.planets = Container:new()
 	local p = {}
 	local numPlanets = math.random(4, self.numPlayers + 7)
 	for i=1, numPlanets do
-		local intersect = true
+		intersect = true
 		while intersect == true do
 			local r = math.random(8, 58)
 			local x = math.random(r + 50, nativeWindowWidth - r - 50)
@@ -438,14 +439,21 @@ function Versus:enteredState()
 				end
 				p[i] = {x, y, r, occupiable}
 				self.planets:add(Planet:new(p[i][1], p[i][2], p[i][3], p[i][4]))
-			end
+			end  
 			
 			time_end = love.timer.getTime()
 			if (time_end - time_start > 2) then
-				intersect = true
-				i = numPlanets + 1
+				intersect = false
+				--i = numPlanets + 1
 				predefined = true
+				break
 			end
+		end
+		if (time_end - time_start > 2) then
+			intersect = false
+			--i = numPlanets + 1
+			predefined = true
+			break
 		end
 	end
 	
